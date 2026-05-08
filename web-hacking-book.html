@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>كتاب البداية في اختراق المواقع</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #050505;
+      color: #ffffff;
+      line-height: 1.7;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 35px 18px;
+      background:
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.18), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(0, 180, 90, 0.12), transparent 30%),
+        #050505;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #00ff88;
+      text-decoration: none;
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 0 14px rgba(0, 255, 136, 0.15);
+    }
+
+    .file-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .cover-card,
+    .info-card,
+    .items-card,
+    .description-card {
+      border: 1px solid rgba(0, 255, 136, 0.32);
+      background: rgba(8, 15, 10, 0.86);
+      border-radius: 24px;
+      box-shadow: 0 0 28px rgba(0, 255, 136, 0.12);
+      overflow: hidden;
+    }
+
+    .cover-card {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .cover-card img {
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #000;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .cover-placeholder {
+      min-height: 360px;
+      border-radius: 18px;
+      border: 1px dashed rgba(0, 255, 136, 0.45);
+      background:
+        radial-gradient(circle, rgba(0,255,136,0.18), transparent 35%),
+        linear-gradient(145deg, rgba(20,0,30,0.9), rgba(0,20,10,0.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .cover-placeholder h2 {
+      color: #00ff88;
+      font-size: 2rem;
+      text-shadow: 0 0 16px rgba(0,255,136,0.7);
+    }
+
+    .items-card {
+      margin-top: 24px;
+      padding: 24px;
+    }
+
+    .items-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #00ff88;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+    }
+
+    .item-icon {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 16px;
+      background: rgba(0, 255, 136, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #00ff88;
+      box-shadow: inset 0 0 16px rgba(0, 255, 136, 0.18);
+    }
+
+    .item h3 {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .item p {
+      color: #a8d8bd;
+      font-size: 0.85rem;
+    }
+
+    .item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .info-card {
+      padding: 30px;
+    }
+
+    .info-card h1 {
+      color: #00ff88;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      text-shadow: 0 0 18px rgba(0, 255, 136, 0.75);
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .access-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+      background: #00ff88;
+      color: #050505;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.45);
+      transition: 0.3s;
+    }
+
+    .access-btn:hover {
+      background: #8affc1;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.8);
+    }
+
+    .file-meta {
+      border-top: 1px solid rgba(0, 255, 136, 0.2);
+      border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+      padding: 18px 0;
+      color: #c8ffe0;
+      margin-bottom: 24px;
+    }
+
+    .author-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0, 255, 136, 0.06);
+      border: 1px solid rgba(0, 255, 136, 0.18);
+      padding: 18px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      background: #00ff88;
+      color: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    .author-box span {
+      color: #9dffca;
+      font-size: 0.9rem;
+    }
+
+    .description-card {
+      padding: 24px;
+    }
+
+    .description-card h2 {
+      color: #00ff88;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(0, 255, 136, 0.45);
+    }
+
+    .description-card p {
+      color: #c8ffe0;
+      margin-bottom: 12px;
+    }
+
+    .warning {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 193, 7, 0.09);
+      border: 1px solid rgba(255, 193, 7, 0.35);
+      color: #ffe7a3;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .file-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 24px 13px;
+      }
+
+      .info-card,
+      .items-card,
+      .description-card,
+      .cover-card {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .cover-placeholder {
+        min-height: 280px;
+      }
+
+      .item {
+        align-items: flex-start;
+      }
+
+      .item-icon {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+
+      <a href="index.html" class="back">← رجوع للمنصة</a>
+
+      <div class="file-layout">
+
+        <section>
+          <div class="cover-card">
+
+            <!-- 
+              إذا عندك صورة غلاف، ارفعها داخل files واستخدم هذا:
+              <img src="files/web-hacking-cover.jpg" alt="كتاب البداية في اختراق المواقع">
+              
+              إذا ما عندك صورة، اترك الشكل الحالي.
+            -->
+
+            <div class="cover-placeholder">
+              <h2>كتاب البداية في اختراق المواقع</h2>
+            </div>
+
+          </div>
+
+          <div class="items-card">
+            <div class="items-title">
+              <span>محتويات الملف</span>
+              <span>1 item</span>
+            </div>
+
+            <div class="item">
+              <div class="item-icon">📄</div>
+              <div>
+                <h3>
+                  <a href="PUT_PDF_LINK_HERE" target="_blank">
+                    الكتاب بصيغة PDF
+                  </a>
+                </h3>
+                <p>PDF - رابط تحميل الكتاب</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside>
+          <div class="info-card">
+            <h1>كتاب البداية في اختراق المواقع</h1>
+
+            <a class="access-btn" href="PUT_PDF_LINK_HERE" target="_blank">
+              Access
+            </a>
+
+            <div class="file-meta">
+              📄 1 Item
+            </div>
+
+            <div class="author-box">
+              <div class="avatar">S</div>
+              <div>
+                <span>Product By</span>
+                <h3>Suhaib Al Juma</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="description-card">
+            <h2>Description</h2>
+            <p>
+              هذا الكتاب هو دليلك الأول لتأسيس مهاراتك في مجال اختبار أمان تطبيقات الويب.
+            </p>
+            <p>
+              يحتوي على مفاهيم أساسية تساعدك على فهم طريقة عمل المواقع، واكتشاف الثغرات الشائعة، وبناء بداية قوية في اختبار الاختراق الأخلاقي.
+            </p>
+
+            <div class="warning">
+              ملاحظة: المحتوى تعليمي فقط، ويجب استخدامه فقط في بيئات مصرح بها أو مختبرات تدريبية.
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
