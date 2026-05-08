@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>برنامج الهاكر المحترف</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #050505;
+      color: #ffffff;
+      line-height: 1.7;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 35px 18px;
+      background:
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.18), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(0, 180, 90, 0.12), transparent 30%),
+        #050505;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #00ff88;
+      text-decoration: none;
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 0 14px rgba(0, 255, 136, 0.15);
+    }
+
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .cover-card,
+    .info-card,
+    .section-card,
+    .description-card {
+      border: 1px solid rgba(0, 255, 136, 0.32);
+      background: rgba(8, 15, 10, 0.86);
+      border-radius: 24px;
+      box-shadow: 0 0 28px rgba(0, 255, 136, 0.12);
+      overflow: hidden;
+    }
+
+    .cover-card {
+      padding: 22px;
+      text-align: center;
+    }
+
+    .cover-box {
+      min-height: 310px;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at right, rgba(0,255,136,0.28), transparent 35%),
+        linear-gradient(135deg, #071018, #06140c);
+      border: 1px solid rgba(0,255,136,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .cover-box h2 {
+      color: #00ff88;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.3;
+      text-shadow: 0 0 18px rgba(0,255,136,0.8);
+    }
+
+    .sections {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-card {
+      padding: 0;
+    }
+
+    details {
+      width: 100%;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 22px;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.05rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "⌄";
+      color: #00ff88;
+      font-size: 1.4rem;
+      transition: 0.3s;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .section-count {
+      color: #9dffca;
+      font-size: 0.9rem;
+      font-weight: normal;
+      margin-top: 4px;
+    }
+
+    .lesson-list {
+      padding: 0 22px 22px;
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(0, 255, 136, 0.13);
+    }
+
+    .lesson-icon {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      border-radius: 14px;
+      background: rgba(0,255,136,0.12);
+      color: #00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: inset 0 0 14px rgba(0,255,136,0.18);
+    }
+
+    .lesson h3 {
+      font-size: 0.98rem;
+      margin-bottom: 3px;
+    }
+
+    .lesson p {
+      color: #a8d8bd;
+      font-size: 0.85rem;
+    }
+
+    .lesson a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .lesson a:hover h3 {
+      color: #00ff88;
+    }
+
+    .playlist-box {
+      margin-top: 18px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 136, 0.25);
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.12);
+    }
+
+    .playlist-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .info-card {
+      padding: 30px;
+    }
+
+    .info-card h1 {
+      color: #00ff88;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      text-shadow: 0 0 18px rgba(0, 255, 136, 0.75);
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .access-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+      background: #00ff88;
+      color: #050505;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.45);
+      transition: 0.3s;
+    }
+
+    .access-btn:hover {
+      background: #8affc1;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.8);
+    }
+
+    .course-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      border-top: 1px solid rgba(0, 255, 136, 0.2);
+      border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+      padding: 18px 0;
+      color: #c8ffe0;
+      margin-bottom: 24px;
+    }
+
+    .author-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0, 255, 136, 0.06);
+      border: 1px solid rgba(0, 255, 136, 0.18);
+      padding: 18px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      background: #00ff88;
+      color: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    .author-box span {
+      color: #9dffca;
+      font-size: 0.9rem;
+    }
+
+    .description-card {
+      padding: 24px;
+    }
+
+    .description-card h2 {
+      color: #00ff88;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(0, 255, 136, 0.45);
+    }
+
+    .description-card p {
+      color: #c8ffe0;
+      margin-bottom: 12px;
+    }
+
+    .warning {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 193, 7, 0.09);
+      border: 1px solid rgba(255, 193, 7, 0.35);
+      color: #ffe7a3;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 24px 13px;
+      }
+
+      .cover-card,
+      .info-card,
+      .description-card {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      summary {
+        padding: 18px;
+        font-size: 0.95rem;
+      }
+
+      .lesson-list {
+        padding: 0 18px 18px;
+      }
+
+      .course-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .cover-box {
+        min-height: 230px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+
+      <a href="index.html" class="back">← رجوع للمنصة</a>
+
+      <div class="course-layout">
+
+        <section>
+          <div class="cover-card">
+            <div class="cover-box">
+              <h2>برنامج الهاكر المحترف</h2>
+            </div>
+          </div>
+
+          <div class="sections">
+
+            <div class="section-card">
+              <details open>
+                <summary>
+                  <div>
+                    الوحدة التعليمية الأولى: ما قبل اختبار الاختراق
+                    <div class="section-count">1 item</div>
+                  </div>
+                </summary>
+
+                <div class="lesson-list">
+                  <div class="lesson">
+                    <div class="lesson-icon">▶️</div>
+                    <div>
+                      <a href="PUT_VIDEO_LINK_HERE" target="_blank">
+                        <h3>رابط الوحدة الأولى</h3>
+                      </a>
+                      <p>URL - فيديو يوتيوب</p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="section-card">
+              <details>
+                <summary>
+                  <div>
+                    الوحدة التعليمية الثانية: استكشاف الشبكة باستخدام Nmap
+                    <div class="section-count">18 items</div>
+                  </div>
+                </summary>
+
+                <div class="lesson-list">
+                  <div class="lesson">
+                    <div class="lesson-icon">▶️</div>
+                    <div>
+                      <a href="https://www.youtube.com/watch?v=Twuv66YBk3Y&list=PL3qy3CDvm8a_fpWuYz0eUF1hyrmkzOpvT&index=18" target="_blank">
+                        <h3>فتح قائمة تشغيل Nmap كاملة</h3>
+                      </a>
+                      <p>Playlist - 18 فيديو يوتيوب</p>
+                    </div>
+                  </div>
+
+                  <div class="playlist-box">
+                    <iframe
+                      src="https://www.youtube.com/embed/videoseries?list=PL3qy3CDvm8a_fpWuYz0eUF1hyrmkzOpvT"
+                      title="Nmap Playlist"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen>
+                    </iframe>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="section-card">
+              <details>
+                <summary>
+                  <div>
+                    الوحدة التعليمية الثالثة: التقنيات المستخدمة في جمع المعلومات Footprinting
+                    <div class="section-count">15 items</div>
+                  </div>
+                </summary>
+
+                <div class="lesson-list">
+                  <div class="lesson">
+                    <div class="lesson-icon">▶️</div>
+                    <div>
+                      <a href="PUT_VIDEO_LINK_HERE" target="_blank">
+                        <h3>الدرس 1: مقدمة في Footprinting</h3>
+                      </a>
+                      <p>URL - فيديو يوتيوب</p>
+                    </div>
+                  </div>
+
+                  <div class="lesson">
+                    <div class="lesson-icon">▶️</div>
+                    <div>
+                      <a href="PUT_VIDEO_LINK_HERE" target="_blank">
+                        <h3>الدرس 2: جمع المعلومات من المصادر المفتوحة</h3>
+                      </a>
+                      <p>URL - فيديو يوتيوب</p>
+                    </div>
+                  </div>
+
+                  <div class="lesson">
+                    <div class="lesson-icon">▶️</div>
+                    <div>
+                      <a href="PUT_VIDEO_LINK_HERE" target="_blank">
+                        <h3>الدرس 3: تحليل المعلومات</h3>
+                      </a>
+                      <p>URL - فيديو يوتيوب</p>
+                    </div>
+                  </div>
+
+                  <div class="lesson">
+                    <div class="lesson-icon">▶️</div>
+                    <div>
+                      <a href="PUT_VIDEO_LINK_HERE" target="_blank">
+                        <h3>أضف باقي فيديوهات Footprinting هنا</h3>
+                      </a>
+                      <p>كرر نفس block للفيديوهات المتبقية</p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+          </div>
+        </section>
+
+        <aside>
+          <div class="info-card">
+            <h1>برنامج الهاكر المحترف</h1>
+
+            <a class="access-btn" href="#course-sections">
+              Access
+            </a>
+
+            <div class="course-meta">
+              <div>☷ 3 Sections</div>
+              <div>📄 34 Items</div>
+            </div>
+
+            <div class="author-box">
+              <div class="avatar">S</div>
+              <div>
+                <span>Product By</span>
+                <h3>Suhaib Al Juma</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="description-card" id="course-sections">
+            <h2>Description</h2>
+            <p>
+              برنامج تدريبي منظم يحتوي على ثلاث وحدات تعليمية، يبدأ من مرحلة ما قبل اختبار الاختراق، ثم ينتقل إلى استكشاف الشبكات باستخدام Nmap، وبعدها تقنيات جمع المعلومات Footprinting.
+            </p>
+            <p>
+              الهدف من البرنامج هو بناء أساس عملي ومنظم للطالب لفهم خطوات جمع المعلومات وتحليلها داخل بيئات تدريبية أو مصرح بها.
+            </p>
+
+            <div class="warning">
+              ملاحظة: هذا المحتوى تعليمي فقط، ويجب استخدامه فقط في بيئات قانونية أو مختبرات تدريبية مصرح بها.
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
