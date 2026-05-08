@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دورة DoS هجمات</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: #050505;
+      color: #ffffff;
+      line-height: 1.7;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 35px 18px;
+      background:
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.18), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(0, 180, 90, 0.12), transparent 30%),
+        #050505;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #00ff88;
+      text-decoration: none;
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 0 14px rgba(0, 255, 136, 0.15);
+    }
+
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .video-card,
+    .info-card,
+    .items-card,
+    .description-card {
+      border: 1px solid rgba(0, 255, 136, 0.32);
+      background: rgba(8, 15, 10, 0.86);
+      border-radius: 24px;
+      box-shadow: 0 0 28px rgba(0, 255, 136, 0.12);
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .items-card {
+      margin-top: 24px;
+      padding: 24px;
+    }
+
+    .items-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #00ff88;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item-icon {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 16px;
+      background: rgba(0, 255, 136, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #00ff88;
+      box-shadow: inset 0 0 16px rgba(0, 255, 136, 0.18);
+    }
+
+    .item h3 {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .item p {
+      color: #a8d8bd;
+      font-size: 0.85rem;
+    }
+
+    .item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .info-card {
+      padding: 30px;
+    }
+
+    .info-card h1 {
+      color: #00ff88;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      text-shadow: 0 0 18px rgba(0, 255, 136, 0.75);
+      margin-bottom: 18px;
+    }
+
+    .access-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+      background: #00ff88;
+      color: #050505;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.45);
+      transition: 0.3s;
+    }
+
+    .access-btn:hover {
+      background: #8affc1;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.8);
+    }
+
+    .course-meta {
+      border-top: 1px solid rgba(0, 255, 136, 0.2);
+      border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+      padding: 18px 0;
+      color: #c8ffe0;
+      margin-bottom: 24px;
+    }
+
+    .author-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0, 255, 136, 0.06);
+      border: 1px solid rgba(0, 255, 136, 0.18);
+      padding: 18px;
+      border-radius: 18px;
+      margin-bottom: 24px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      background: #00ff88;
+      color: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    .author-box span {
+      color: #9dffca;
+      font-size: 0.9rem;
+    }
+
+    .description-card {
+      padding: 24px;
+    }
+
+    .description-card h2 {
+      color: #00ff88;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(0, 255, 136, 0.45);
+    }
+
+    .description-card p {
+      color: #c8ffe0;
+    }
+
+    .warning {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 193, 7, 0.09);
+      border: 1px solid rgba(255, 193, 7, 0.35);
+      color: #ffe7a3;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 24px 13px;
+      }
+
+      .info-card,
+      .items-card,
+      .description-card {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .item {
+        align-items: flex-start;
+      }
+
+      .item-icon {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+
+      <a href="index.html" class="back">← رجوع للمنصة</a>
+
+      <div class="course-layout">
+
+        <section>
+          <div class="video-card">
+            <div class="video-wrapper">
+
+              <!-- 
+                ضع هنا رابط فيديو اليوتيوب unlisted
+                مثال:
+                لو رابط الفيديو:
+                https://www.youtube.com/watch?v=ABC123
+                خذ فقط ABC123 وضعه مكان VIDEO_ID
+              -->
+
+              <iframe
+                src="https://www.youtube.com/embed/872PSy2WV3A"
+                title="دورة DoS هجمات"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+
+            </div>
+          </div>
+
+          <div class="items-card">
+            <div class="items-title">
+              <span>محتويات الدورة</span>
+              <span>3 items</span>
+            </div>
+
+            <div class="item">
+              <div class="item-icon">▶️</div>
+              <div>
+                <h3>
+                  <a href="https://www.youtube.com/watch?v=872PSy2WV3A" target="_blank">
+                    دورة إخراج الخدمة
+                  </a>
+                </h3>
+                <p>URL - فيديو يوتيوب غير مدرج</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="item-icon">🎁</div>
+              <div>
+                <h3>
+                  <a href="files/dos-gift.pdf" target="_blank">
+                    هدية مجانية: ملف دورة إخراج الخدمة
+                  </a>
+                </h3>
+                <p>PDF - 25 MB</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="item-icon">🎁</div>
+              <div>
+                <h3>
+                  <a href="files/dos-tools.zip" target="_blank">
+                    هدية مجانية: كودات الدورة
+                  </a>
+                </h3>
+                <p>ZIP - 2 KB</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside>
+          <div class="info-card">
+            <h1>دورة DoS هجمات</h1>
+
+            <a class="access-btn" href="#course-content">
+              Access
+            </a>
+
+            <div class="course-meta">
+              📄 3 Items
+            </div>
+
+            <div class="author-box">
+              <div class="avatar">S</div>
+              <div>
+                <span>Product By</span>
+                <h3>Suhaib Al Juma</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="description-card" id="course-content">
+            <h2>Description</h2>
+            <p>
+              خاص: دورة إخراج الخدمة DoS course private.
+              تحتوي هذه الصفحة على فيديو الدورة والملفات المرفقة الخاصة بها.
+            </p>
+
+            <div class="warning">
+              ملاحظة: المحتوى تعليمي فقط، ويجب استخدامه داخل بيئة تدريبية أو اختبار مصرح به.
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
